@@ -1,1 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All We Do Is Spin — Luxury Photo Experiences · Tampa, Florida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & BASE ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C575;
+    --gold-pale: #F5E6C0;
+    --gold-dim: rgba(201,168,76,0.15);
+    --black: #080808;
+    --charcoal: #0F0F0F;
+    --surface: #141414;
+    --surface2: #1A1A1A;
+    --text: #EDE8DF;
+    --text-muted: #9A9080;
+    --serif: 'Playfair Display', Georgia, serif;
+    --serif2: 'Cormorant Garamond', serif;
+    --sans: 'Montserrat', sans-serif;
+    --radius: 2px;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── MARBLE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        108deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(201,168,76,0.018) 80px,
+        rgba(201,168,76,0.018) 81px
+      ),
+      repeating-linear-gradient(
+        72deg,
+        transparent 0px,
+        transparent 120px,
+        rgba(255,255,255,0.012) 120px,
+        rgba(255,255,255,0.012) 121px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── AURORA AMBIENT ── */
+  .aurora {
+    position: fixed;
+    top: -40%;
+    left: -20%;
+    width: 140%;
+    height: 80%;
+    background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 80% 20%, rgba(100,60,20,0.08) 0%, transparent 70%);
+    animation: aurora-drift 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes aurora-drift {
+    0%   { transform: translate(0,0) scale(1); opacity: 0.8; }
+    50%  { transform: translate(3%,5%) scale(1.05); opacity: 1; }
+    100% { transform: translate(-2%,2%) scale(0.97); opacity: 0.9; }
+  }
+
+  section, nav, footer { position: relative; z-index: 1; }
+
+  /* ── SCROLL FADE-IN ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .fade-up.delay-1 { transition-delay: 0.1s; }
+  .fade-up.delay-2 { transition-delay: 0.2s; }
+  .fade-up.delay-3 { transition-delay: 0.35s; }
+  .fade-up.delay-4 { transition-delay: 0.5s; }
+
+  /* ── GOLD DIVIDER ── */
+  .gold-line {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  /* ══════════════════════════════════
+     HERO
+  ══════════════════════════════════ */
+  #hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Faux photo background — marble-black with gold glow */
+  #hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 80% at 15% 80%, rgba(80,40,10,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 10%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fade-in-up 1s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 7vw, 5.5rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fade-in-up 1s 0.45s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: var(--serif2);
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fade-in-up 1s 0.65s forwards;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fade-in-up 1s 0.85s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold);
+    color: #080808;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.1rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(201,168,76,0.35); }
+  .btn-primary:hover::before { transform: translateX(100%); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--gold);
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.1rem 2.5rem;
+    border: 1px solid rgba(201,168,76,0.4);
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+  /* Stats strip */
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    width: 100%;
+    max-width: 700px;
+    opacity: 0;
+    animation: fade-in-up 1s 1.1s forwards;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--gold-light);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ══════════════════════════════════
+     TRUST / TESTIMONIALS
+  ══════════════════════════════════ */
+  #trust {
+    padding: 7rem 1.5rem;
+    background: var(--charcoal);
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    text-align: center;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  .section-sub {
+    font-family: var(--serif2);
+    font-style: italic;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  /* Trust badges */
+  .trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+  }
+
+  .badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.03);
+    text-align: center;
+    min-width: 160px;
+  }
+
+  .badge-icon { font-size: 1.6rem; }
+  .badge-val {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--gold-light);
+  }
+  .badge-desc { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* Testimonials */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .testi-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, rgba(201,168,76,0.01) 100%);
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+
+  .testi-card::before {
+    content: '\201C';
+    font-family: var(--serif);
+    font-size: 5rem;
+    color: rgba(201,168,76,0.2);
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    line-height: 1;
+  }
+
+  .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 1rem; }
+
+  .testi-text {
+    font-family: var(--serif2);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .testi-event { color: var(--text-muted); }
+
+  /* ══════════════════════════════════
+     SERVICES / PRODUCTS
+  ══════════════════════════════════ */
+  #services {
+    padding: 7rem 1.5rem;
+    background: var(--black);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .product-card:hover { transform: translateY(-6px); }
+
+  /* Faux product image — rich gradient placeholders */
+  .product-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+  }
+
+  .product-img .img-icon {
+    font-size: 3.5rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .product-img-1 { background: linear-gradient(135deg, #1a1208, #3d2a08, #1a1208); }
+  .product-img-2 { background: linear-gradient(135deg, #0d1520, #1d3045, #0d1520); }
+  .product-img-3 { background: linear-gradient(135deg, #140d20, #2d1a45, #140d20); }
+  .product-img-4 { background: linear-gradient(135deg, #1a1010, #3d1a1a, #1a1010); }
+
+  .product-tag {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    z-index: 2;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 0.3rem 0.75rem;
+    font-weight: 600;
+  }
+
+  .product-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,168,76,0.18) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 1;
+  }
+
+  .product-card:hover .product-glow { opacity: 1; }
+
+  .product-info {
+    padding: 1.75rem 1.5rem;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-top: none;
+  }
+
+  .product-name {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .product-price {
+    font-family: var(--serif2);
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  /* ══════════════════════════════════
+     HOW IT WORKS
+  ══════════════════════════════════ */
+  #process {
+    padding: 7rem 1.5rem;
+    background: var(--charcoal);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold-dim), transparent);
+    display: none;
+  }
+
+  @media (min-width: 800px) { .process-steps::before { display: block; } }
+
+  .step { text-align: center; padding: 2rem 1rem; }
+
+  .step-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    color: rgba(201,168,76,0.2);
+    display: block;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ══════════════════════════════════
+     FAQ
+  ══════════════════════════════════ */
+  #faq {
+    padding: 7rem 1.5rem;
+    background: var(--black);
+  }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    text-align: left;
+    padding: 1.75rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.3s;
+  }
+
+  .faq-q:hover { color: var(--gold-light); }
+
+  .faq-icon {
+    color: var(--gold);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    font-style: normal;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.22,1,0.36,1), padding 0.4s;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.5rem; }
+
+  /* ══════════════════════════════════
+     BOOKING FORM
+  ══════════════════════════════════ */
+  #booking {
+    padding: 7rem 1.5rem;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #booking::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(ellipse 60% 50% at 60% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .form-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field.full { grid-column: 1/-1; }
+
+  .form-field label {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    padding: 0.9rem 1rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    width: 100%;
+  }
+
+  .form-field select option { background: var(--surface); }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .form-field textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+  }
+
+  .form-privacy {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+
+  /* ══════════════════════════════════
+     FLOATING WHATSAPP
+  ══════════════════════════════════ */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: #25D366;
+    color: #fff;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+    animation: wa-pulse 3s ease-in-out infinite;
+    transition: transform 0.3s;
+  }
+
+  .wa-float:hover { transform: scale(1.1); }
+
+  @keyframes wa-pulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 40px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+  }
+
+  /* ══════════════════════════════════
+     FOOTER STRIP
+  ══════════════════════════════════ */
+  footer {
+    background: #060606;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ══════════════════════════════════
+     UTILITY
+  ══════════════════════════════════ */
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  @media (max-width: 600px) {
+    .hero-stats { gap: 2rem; }
+    .trust-badges { gap: 1rem; }
+    .badge { min-width: 130px; padding: 1.2rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aurora"></div>
+
+<!-- ═══ FLOATING WHATSAPP ═══ -->
+<a class="wa-float" href="https://wa.me/18135550123" target="_blank" title="Chat on WhatsApp" aria-label="WhatsApp">💬</a>
+
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════ -->
+<section id="hero">
+  <p class="hero-eyebrow">Tampa, Florida · Est. 2018 · 500+ Events</p>
+
+  <h1 class="hero-title">
+    Tampa's Trusted<br>
+    <em>Photo Booth</em><br>
+    Experience
+  </h1>
+
+  <p class="hero-sub">From Weddings to Birthdays — Real Memories, Captured in Gold</p>
+
+  <div class="hero-cta-group">
+    <a href="#booking" class="btn-primary">Book Free Consult Now →</a>
+    <a href="#services" class="btn-ghost">View Packages</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-number">500+</span>
+      <span class="stat-label">Events Served</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">200+</span>
+      <span class="stat-label">5-Star Reviews</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">7+</span>
+      <span class="stat-label">Years in Tampa</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     TRUST
+═══════════════════════════════ -->
+<section id="trust">
+  <p class="section-label fade-up">Why Tampa Chooses Us</p>
+  <h2 class="section-title fade-up delay-1">Trusted by <em>Hundreds</em> of Brides,<br>Families & Event Planners</h2>
+  <p class="section-sub fade-up delay-2">Since 2018 — Florida's Premier Luxury Photo Experience</p>
+
+  <div class="trust-badges fade-up delay-2">
+    <div class="badge">
+      <span class="badge-icon">🏆</span>
+      <span class="badge-val">5.0 ★</span>
+      <span class="badge-desc">200+ Brides Rate Us</span>
+    </div>
+    <div class="badge">
+      <span class="badge-icon">💎</span>
+      <span class="badge-val">Since 2018</span>
+      <span class="badge-desc">Handcrafted Memories</span>
+    </div>
+    <div class="badge">
+      <span class="badge-icon">🎉</span>
+      <span class="badge-val">500+</span>
+      <span class="badge-desc">Events & Counting</span>
+    </div>
+    <div class="badge">
+      <span class="badge-icon">🌴</span>
+      <span class="badge-val">FL Exclusive</span>
+      <span class="badge-desc">Tampa Specialists</span>
+    </div>
+  </div>
+
+  <span class="gold-line fade-up"></span>
+
+  <div class="testi-grid">
+    <div class="testi-card fade-up delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Absolutely stunning experience. Our guests couldn't stop talking about the photo booth all night. Worth every penny — pure luxury.</p>
+      <p class="testi-author">— Sofia M. <span class="testi-event">· Wedding, Tampa Bay 2024</span></p>
+    </div>
+    <div class="testi-card fade-up delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Booked for my daughter's quinceañera and it elevated the entire event. The gold framing looked incredible in every single photo.</p>
+      <p class="testi-author">— Maria L. <span class="testi-event">· Quinceañera, Clearwater</span></p>
+    </div>
+    <div class="testi-card fade-up delay-3">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Our corporate gala needed something special. All We Do Is Spin delivered beyond expectations. Clients still share their photos months later.</p>
+      <p class="testi-author">— James R. <span class="testi-event">· Corporate Gala, St. Petersburg</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     SERVICES / PACKAGES
+═══════════════════════════════ -->
+<section id="services">
+  <p class="section-label fade-up">Our Signature Experiences</p>
+  <h2 class="section-title fade-up delay-1">Every Package is a<br><em>Work of Art</em></h2>
+  <p class="section-sub fade-up delay-2">Select your experience. We handle every detail.</p>
+
+  <div class="product-grid">
+    <div class="product-card fade-up delay-1">
+      <div class="product-img product-img-1">
+        <div class="product-glow"></div>
+        <span class="product-tag">Most Popular</span>
+        <span class="img-icon">📸</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">360° Spin Booth</h3>
+        <p class="product-desc">Our signature rotating camera platform. Slow-motion video, instant social sharing, gold-branded overlays.</p>
+        <span class="product-price">from $699</span>
+      </div>
+    </div>
+    <div class="product-card fade-up delay-2">
+      <div class="product-img product-img-2">
+        <div class="product-glow"></div>
+        <span class="product-tag">Weddings</span>
+        <span class="img-icon">💍</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">DSLR Mirror Booth</h3>
+        <p class="product-desc">Full-length mirror experience with custom touchscreen graphics, props, and premium print strips.</p>
+        <span class="product-price">from $549</span>
+      </div>
+    </div>
+    <div class="product-card fade-up delay-3">
+      <div class="product-img product-img-3">
+        <div class="product-glow"></div>
+        <span class="product-tag">Corporate</span>
+        <span class="img-icon">✨</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Digital Glam Booth</h3>
+        <p class="product-desc">AI-powered beauty filters, instant email delivery, fully branded for corporate events and brand activations.</p>
+        <span class="product-price">from $449</span>
+      </div>
+    </div>
+    <div class="product-card fade-up delay-4">
+      <div class="product-img product-img-4">
+        <div class="product-glow"></div>
+        <span class="product-tag">Limited Edition</span>
+        <span class="img-icon">🌟</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Gold Photo Magnets</h3>
+        <p class="product-desc">Hand-poured resin heirlooms. Gold-fleck, crystal-edge, or acrylic-border — bespoke keepsakes guests take home.</p>
+        <span class="product-price">from $99</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════ -->
+<section id="process">
+  <p class="section-label fade-up">Simple, Seamless, Stunning</p>
+  <h2 class="section-title fade-up delay-1">How It <em>Works</em></h2>
+  <span class="gold-line fade-up delay-2"></span>
+
+  <div class="process-steps">
+    <div class="step fade-up delay-1">
+      <span class="step-num">01</span>
+      <h3 class="step-title">Book Your Consult</h3>
+      <p class="step-desc">Fill out our form or message us on WhatsApp. We confirm availability and match your event vision within 24 hours.</p>
+    </div>
+    <div class="step fade-up delay-2">
+      <span class="step-num">02</span>
+      <h3 class="step-title">We Design Everything</h3>
+      <p class="step-desc">Custom overlays, branded props, and event-specific touches — curated around your aesthetic and color palette.</p>
+    </div>
+    <div class="step fade-up delay-3">
+      <span class="step-num">03</span>
+      <h3 class="step-title">Arrive & Dazzle</h3>
+      <p class="step-desc">Our team sets up 60 minutes before your event. You relax. Your guests spin, click, and fall in love with every frame.</p>
+    </div>
+    <div class="step fade-up delay-4">
+      <span class="step-num">04</span>
+      <h3 class="step-title">Keep the Memories</h3>
+      <p class="step-desc">Instant prints, digital gallery, or heirloom magnets — memories delivered the same night or shipped within 5 days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     FAQ
+═══════════════════════════════ -->
+<section id="faq">
+  <p class="section-label fade-up">Questions &amp; Answers</p>
+  <h2 class="section-title fade-up delay-1">Everything You Need<br>to <em>Know</em></h2>
+  <span class="gold-line fade-up delay-2"></span>
+
+  <div class="faq-list fade-up delay-2">
+    <div class="faq-item">
+      <button class="faq-q">
+        How long does it take for custom orders?
+        <em class="faq-icon">+</em>
+      </button>
+      <p class="faq-a">Standard orders are ready within 5–7 business days. Rush orders (2–3 days) are available for an additional fee. Digital packages are delivered the same night as your event.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        Can I add custom text or names?
+        <em class="faq-icon">+</em>
+      </button>
+      <p class="faq-a">Absolutely. All packages include custom overlays with your names, event date, and any text you choose. Gold foil text and monograms are available at no extra cost for wedding packages.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        Do you ship across Florida?
+        <em class="faq-icon">+</em>
+      </button>
+      <p class="faq-a">Yes — we serve all of Florida with flat-rate shipping on magnets and print orders. In-person booth setups are available within 60 miles of Tampa. Contact us for locations further afield.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        Can you handle large wedding favor orders?
+        <em class="faq-icon">+</em>
+      </button>
+      <p class="faq-a">We specialize in wedding favor packages — from 50 to 500+ guests. Bulk pricing starts at 20 units. Each magnet is individually packaged in a gold gift sleeve with your custom messaging.</p>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        What events do you serve?
+        <em class="faq-icon">+</em>
+      </button>
+      <p class="faq-a">Weddings, quinceañeras, birthdays, baby showers, corporate galas, brand activations, proms, and more. If you're celebrating something, we're there for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     BOOKING FORM
+═══════════════════════════════ -->
+<section id="booking">
+  <p class="section-label fade-up">Florida Exclusive</p>
+  <h2 class="section-title fade-up delay-1">Join 300+ Happy Clients —<br><em>Book Your Free Consult</em></h2>
+  <p class="section-sub fade-up delay-2">No commitment. Just a friendly conversation about your event.</p>
+  <span class="gold-line fade-up"></span>
+
+  <div class="form-wrap fade-up delay-2">
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Sofia Martinez" required>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="sofia@email.com" required>
+        </div>
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+1 (813) 555-0000">
+        </div>
+        <div class="form-field">
+          <label>Your Event</label>
+          <select>
+            <option value="" disabled selected>Select event type</option>
+            <option>Wedding / Reception</option>
+            <option>Quinceañera</option>
+            <option>Birthday Party</option>
+            <option>Corporate Event</option>
+            <option>Baby / Bridal Shower</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field full">
+          <label>Tell Us About Your Event</label>
+          <textarea placeholder="Date, venue, number of guests, special requests..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn-primary form-submit">Reserve My Free Consultation →</button>
+      <p class="form-privacy">🔒 Your information is private. No spam, ever. We respond within 24 hours.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     FOOTER
+═══════════════════════════════ -->
+<footer>
+  <p class="footer-brand">All We Do Is Spin</p>
+  <p class="footer-sub">Tampa, Florida · hello@allwedoisspin.com · (813) 555-0123</p>
+</footer>
+
+<script>
+  /* ── SCROLL FADE-IN ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── FORM SUBMIT ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Request Sent — We\'ll Be in Touch!';
+    btn.style.background = '#2d5a2d';
+    btn.style.color = '#a0e0a0';
+    btn.disabled = true;
+  }
+
+  /* ── SMOOTH SCROLL FOR ANCHOR LINKS ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
 
