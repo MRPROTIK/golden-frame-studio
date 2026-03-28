@@ -8,197 +8,184 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --gold:#C89040;
-  --gold-light:#E8C090;
-  --rose:#E8A0C0;
-  --blush:#FDF0F5;
-  --muted:rgba(253,240,245,0.5);
-  --muted2:rgba(253,240,245,0.35);
-}
+:root{--gold:#C89040;--gold-light:#E8C090;--rose:#E8A0C0;--blush:#FDF0F5;--muted:rgba(253,240,245,0.55);--muted2:rgba(253,240,245,0.35)}
 html{scroll-behavior:smooth}
-body{background:#0d0508;color:var(--blush);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh}
+body{background:#0d0508;color:#FDF0F5;font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh}
 
 /* AURORA */
 .aurora-bg{position:fixed;inset:0;z-index:0;overflow:hidden}
-.aurora-bg::before{
-  content:'';position:absolute;width:220%;height:220%;top:-60%;left:-60%;
-  background:
-    radial-gradient(ellipse 75% 55% at 15% 20%, rgba(140,30,80,0.75) 0%, transparent 55%),
-    radial-gradient(ellipse 65% 45% at 85% 10%, rgba(180,40,120,0.5) 0%, transparent 50%),
-    radial-gradient(ellipse 85% 65% at 50% 85%, rgba(100,20,140,0.55) 0%, transparent 58%),
-    radial-gradient(ellipse 55% 75% at 92% 62%, rgba(120,30,160,0.45) 0%, transparent 48%),
-    radial-gradient(ellipse 95% 55% at 8% 72%, rgba(160,20,100,0.4) 0%, transparent 52%),
-    radial-gradient(ellipse 50% 40% at 40% 40%, rgba(200,80,160,0.2) 0%, transparent 45%);
-  animation:auroraA 20s ease-in-out infinite alternate;
-}
-.aurora-bg::after{
-  content:'';position:absolute;width:220%;height:220%;top:-60%;left:-60%;
-  background:
-    radial-gradient(ellipse 55% 38% at 72% 28%, rgba(200,144,64,0.18) 0%, transparent 48%),
-    radial-gradient(ellipse 75% 48% at 28% 65%, rgba(140,40,180,0.35) 0%, transparent 52%),
-    radial-gradient(ellipse 45% 55% at 62% 88%, rgba(180,60,140,0.28) 0%, transparent 48%),
-    radial-gradient(ellipse 60% 35% at 88% 40%, rgba(100,20,120,0.3) 0%, transparent 45%);
-  animation:auroraB 26s ease-in-out infinite alternate;
-}
-.aurora-overlay{position:fixed;inset:0;z-index:1;background:rgba(13,5,8,0.32)}
-@keyframes auroraA{0%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(-2%,3%) rotate(1.5deg)}66%{transform:translate(3%,-2%) rotate(-1deg)}100%{transform:translate(-1%,4%) rotate(2deg)}}
-@keyframes auroraB{0%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(4%,-3%) rotate(-2deg)}100%{transform:translate(-3%,2%) rotate(1.5deg)}}
-
-.content{position:relative;z-index:2}
+.aurora-bg::before{content:'';position:absolute;width:220%;height:220%;top:-60%;left:-60%;
+background:
+radial-gradient(ellipse 75% 55% at 15% 20%,rgba(140,30,80,0.75) 0%,transparent 55%),
+radial-gradient(ellipse 65% 45% at 85% 10%,rgba(180,40,120,0.5) 0%,transparent 50%),
+radial-gradient(ellipse 85% 65% at 50% 85%,rgba(100,20,140,0.55) 0%,transparent 58%),
+radial-gradient(ellipse 55% 75% at 92% 62%,rgba(120,30,160,0.45) 0%,transparent 48%),
+radial-gradient(ellipse 95% 55% at 8% 72%,rgba(160,20,100,0.4) 0%,transparent 52%);
+animation:aA 20s ease-in-out infinite alternate}
+.aurora-bg::after{content:'';position:absolute;width:220%;height:220%;top:-60%;left:-60%;
+background:
+radial-gradient(ellipse 55% 38% at 72% 28%,rgba(200,144,64,0.18) 0%,transparent 48%),
+radial-gradient(ellipse 75% 48% at 28% 65%,rgba(140,40,180,0.35) 0%,transparent 52%),
+radial-gradient(ellipse 45% 55% at 62% 88%,rgba(180,60,140,0.28) 0%,transparent 48%);
+animation:aB 26s ease-in-out infinite alternate}
+.aurora-overlay{position:fixed;inset:0;z-index:1;background:rgba(13,5,8,0.38)}
+@keyframes aA{0%{transform:translate(0,0)}100%{transform:translate(-2%,4%)}}
+@keyframes aB{0%{transform:translate(0,0)}100%{transform:translate(4%,-3%)}}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:1.2rem 4rem;display:flex;justify-content:space-between;align-items:center;
-  background:rgba(13,5,8,0.5);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border-bottom:1px solid rgba(232,160,192,0.12);
-}
-.logo{font-family:'Playfair Display',serif;font-size:1.3rem;letter-spacing:0.12em;text-decoration:none}
-.logo em{font-style:italic;color:var(--gold-light)}
-.logo span{color:var(--blush)}
-nav ul{list-style:none;display:flex;gap:2.5rem}
-nav ul li a{color:var(--muted);text-decoration:none;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
-nav ul li a:hover{color:var(--blush)}
-.nav-cta{background:rgba(200,144,64,0.15);border:1px solid rgba(200,144,64,0.4);color:var(--gold-light);padding:0.5rem 1.4rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Montserrat',sans-serif;backdrop-filter:blur(8px)}
-.nav-cta:hover{background:rgba(200,144,64,0.3);color:var(--blush)}
+.content{position:relative;z-index:2}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(13,5,8,0.6);backdrop-filter:blur(24px);border-bottom:1px solid rgba(232,160,192,0.12)}
+.logo{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.1em;text-decoration:none;text-shadow:0 0 20px rgba(232,192,144,0.4)}
+.logo em{font-style:italic;color:#E8C090}
+.logo span{color:#FDF0F5}
+.nav-desktop{display:none}
+.nav-cta-desk{display:none}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{width:22px;height:1.5px;background:#FDF0F5;display:block;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:rgba(13,5,8,0.97);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateY(-100%);transition:transform 0.4s ease}
+.nav-drawer.open{transform:translateY(0)}
+.nav-drawer a{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;color:#FDF0F5;text-decoration:none;letter-spacing:0.08em;text-shadow:0 0 30px rgba(232,160,192,0.3)}
+.nav-drawer a:hover{color:#E8C090}
+.drawer-cta{background:linear-gradient(135deg,rgba(200,144,64,0.85),rgba(232,192,144,0.92));color:#0d0508;padding:0.9rem 2.5rem;font-family:'Montserrat',sans-serif;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;border:none;cursor:pointer;font-weight:500;margin-top:1rem}
 
-/* PAGE TABS */
-.page-tabs{display:flex;justify-content:center;padding:5.5rem 0 0;position:relative;z-index:10}
-.tab-btn{background:rgba(253,240,245,0.06);backdrop-filter:blur(12px);border:1px solid rgba(253,240,245,0.15);color:var(--muted);padding:0.7rem 2rem;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;border-right:none}
-.tab-btn:last-child{border-right:1px solid rgba(253,240,245,0.15)}
-.tab-btn.active{background:rgba(200,144,64,0.22);color:var(--gold-light);border-color:rgba(200,144,64,0.4)}
-.tab-btn:hover:not(.active){background:rgba(253,240,245,0.1);color:var(--blush)}
+@media(min-width:768px){
+  nav{padding:1.1rem 3rem}
+  .logo{font-size:1.3rem}
+  .hamburger{display:none}
+  .nav-desktop{display:flex;gap:2.5rem;list-style:none}
+  .nav-desktop li a{color:rgba(253,240,245,0.55);text-decoration:none;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s}
+  .nav-desktop li a:hover{color:#FDF0F5}
+  .nav-cta-desk{display:block;background:rgba(200,144,64,0.15);border:1px solid rgba(200,144,64,0.4);color:#E8C090;padding:0.5rem 1.4rem;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;backdrop-filter:blur(8px);transition:all 0.3s}
+  .nav-cta-desk:hover{background:rgba(200,144,64,0.3)}
+}
+
+/* PAGE SYSTEM — NO TABS */
 .page{display:none}.page.active{display:block}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
-.float-card{position:absolute;background:rgba(253,240,245,0.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(232,160,192,0.2);border-radius:14px;overflow:hidden}
-.float-card-1{width:150px;height:195px;top:18%;left:4%;transform:rotate(-7deg);animation:fl1 7s ease-in-out infinite}
-.float-card-2{width:125px;height:165px;top:28%;right:4%;transform:rotate(6deg);animation:fl2 9s ease-in-out infinite}
-.float-card-3{width:105px;height:138px;bottom:14%;left:9%;transform:rotate(4deg);animation:fl1 8s ease-in-out infinite 2s}
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 3rem;position:relative;overflow:hidden}
+.float-card{position:absolute;background:rgba(253,240,245,0.07);backdrop-filter:blur(14px);border:1px solid rgba(232,160,192,0.2);border-radius:12px;overflow:hidden;display:none}
+@media(min-width:900px){
+  .float-card{display:block}
+  .float-card-1{width:150px;height:195px;top:18%;left:4%;transform:rotate(-7deg);animation:fl1 7s ease-in-out infinite}
+  .float-card-2{width:125px;height:165px;top:28%;right:4%;transform:rotate(6deg);animation:fl2 9s ease-in-out infinite}
+  .float-card-3{width:105px;height:138px;bottom:14%;left:9%;transform:rotate(4deg);animation:fl1 8s ease-in-out infinite 2s}
+}
 .float-card img{width:100%;height:100%;object-fit:cover;opacity:0.82}
 @keyframes fl1{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(-7deg) translateY(-14px)}}
 @keyframes fl2{0%,100%{transform:rotate(6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-11px)}}
-.hero-content{position:relative;z-index:2;max-width:820px}
-.eyebrow{font-size:0.68rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--rose);margin-bottom:1.5rem;opacity:0.9}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);line-height:1.12;font-weight:400;color:var(--blush);margin-bottom:1.5rem;text-shadow:0 2px 40px rgba(140,30,80,0.5)}
-.hero h1 em{font-style:italic;color:var(--gold-light)}
-.gold-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.5rem auto;opacity:0.65}
-.hero-sub{font-size:0.88rem;letter-spacing:0.05em;color:var(--muted);margin-bottom:2rem;line-height:1.95}
-.price-pill{display:inline-block;background:rgba(200,144,64,0.1);border:1px solid rgba(200,144,64,0.28);backdrop-filter:blur(8px);padding:0.55rem 1.7rem;border-radius:60px;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--muted);margin-bottom:2.5rem}
-.price-pill strong{color:var(--gold-light);font-size:1.3rem}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:linear-gradient(135deg,rgba(200,144,64,0.85),rgba(232,192,144,0.92));color:#0d0508;padding:1rem 2.6rem;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.3s}
+.hero-content{position:relative;z-index:2;max-width:680px;width:100%}
+.eyebrow{font-size:0.62rem;letter-spacing:0.38em;text-transform:uppercase;color:#E8A0C0;margin-bottom:1.2rem;opacity:0.9;text-shadow:0 0 12px rgba(232,160,192,0.5)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,8vw,5rem);line-height:1.12;font-weight:400;color:#FDF0F5;margin-bottom:1.2rem;text-shadow:0 2px 30px rgba(140,30,80,0.7),0 0 60px rgba(100,20,140,0.4)}
+.hero h1 em{font-style:italic;color:#E8C090;text-shadow:0 0 30px rgba(232,192,144,0.7)}
+.gold-line{width:50px;height:1px;background:linear-gradient(90deg,transparent,#C89040,transparent);margin:1.2rem auto;opacity:0.7}
+.hero-sub{font-size:clamp(0.82rem,2.2vw,0.92rem);letter-spacing:0.04em;color:rgba(253,240,245,0.6);margin-bottom:1.6rem;line-height:1.95;text-shadow:0 1px 8px rgba(13,5,8,0.9)}
+.price-pill{display:inline-block;background:rgba(200,144,64,0.1);border:1px solid rgba(200,144,64,0.3);backdrop-filter:blur(8px);padding:0.5rem 1.5rem;border-radius:60px;font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(253,240,245,0.6);margin-bottom:2rem}
+.price-pill strong{color:#E8C090;font-size:1.25rem;text-shadow:0 0 20px rgba(232,192,144,0.5)}
+.hero-btns{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,rgba(200,144,64,0.88),rgba(232,192,144,0.94));color:#0d0508;padding:0.95rem 2.2rem;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.3s;box-shadow:0 4px 20px rgba(200,144,64,0.3)}
 .btn-primary:hover{background:linear-gradient(135deg,rgba(232,192,144,1),rgba(255,215,160,1))}
-.btn-ghost{background:rgba(253,240,245,0.08);color:var(--blush);border:1px solid rgba(253,240,245,0.25);padding:0.97rem 2.6rem;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;backdrop-filter:blur(8px)}
-.btn-ghost:hover{background:rgba(253,240,245,0.16);border-color:rgba(253,240,245,0.4)}
+.btn-ghost{background:rgba(253,240,245,0.08);color:#FDF0F5;border:1px solid rgba(253,240,245,0.25);padding:0.93rem 2.2rem;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.3s;backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(253,240,245,0.15)}
 
 /* MARQUEE */
-.marquee-wrap{padding:1.5rem 0;overflow:hidden;position:relative;z-index:2;background:rgba(253,240,245,0.05);backdrop-filter:blur(10px);border-top:1px solid rgba(232,160,192,0.1);border-bottom:1px solid rgba(232,160,192,0.1)}
-.marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:mq 28s linear infinite}
-.marquee-item{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--muted2);letter-spacing:0.2em;flex-shrink:0}
-.marquee-dot{color:var(--gold-light);margin:0 0.8rem}
+.marquee-wrap{padding:1.3rem 0;overflow:hidden;position:relative;z-index:2;background:rgba(253,240,245,0.04);backdrop-filter:blur(10px);border-top:1px solid rgba(232,160,192,0.1);border-bottom:1px solid rgba(232,160,192,0.1)}
+.marquee-inner{display:flex;gap:2.5rem;white-space:nowrap;animation:mq 28s linear infinite}
+.marquee-item{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:rgba(253,240,245,0.35);letter-spacing:0.2em;flex-shrink:0}
+.marquee-dot{color:#E8C090;margin:0 0.6rem}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTIONS */
-.section{padding:7rem 4rem;position:relative;z-index:2}
-.section-label{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;text-align:center;opacity:0.85}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;text-align:center;color:var(--blush);margin-bottom:0.8rem}
-.section-sub{font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:4rem;letter-spacing:0.05em}
+.section{padding:5rem 1.5rem;position:relative;z-index:2}
+@media(min-width:768px){.section{padding:7rem 4rem}}
+.section-label{font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:#E8A0C0;margin-bottom:0.8rem;text-align:center;opacity:0.85;text-shadow:0 0 12px rgba(232,160,192,0.4)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,3rem);font-weight:400;text-align:center;color:#FDF0F5;margin-bottom:0.7rem;text-shadow:0 2px 20px rgba(140,30,80,0.5)}
+.section-sub{font-size:0.82rem;color:rgba(253,240,245,0.5);text-align:center;margin-bottom:2.5rem;letter-spacing:0.05em}
 
 /* FEATURED GRID */
-.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin:0 auto}
+.featured-grid{display:grid;grid-template-columns:1fr;gap:12px;max-width:1100px;margin:0 auto}
+@media(min-width:500px){.featured-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.featured-grid{grid-template-columns:repeat(3,1fr)}}
 .feat-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer;border-radius:12px;border:1px solid rgba(232,160,192,0.15)}
 .feat-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s;filter:brightness(0.82) saturate(1.1)}
-.feat-card:hover img{transform:scale(1.06);filter:brightness(0.65) saturate(1.2)}
-.feat-card-info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(13,5,8,0.88));backdrop-filter:blur(3px);transform:translateY(8px);transition:transform 0.4s}
-.feat-card:hover .feat-card-info{transform:translateY(0)}
-.feat-tag{display:inline-block;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-light);border:1px solid rgba(200,144,64,0.38);padding:0.22rem 0.65rem;margin-bottom:0.5rem;border-radius:30px;background:rgba(200,144,64,0.1)}
-.feat-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--blush);margin-bottom:0.3rem}
-.feat-price{font-size:0.8rem;color:var(--gold-light);letter-spacing:0.1em}
+.feat-card:hover img{transform:scale(1.06);filter:brightness(0.65)}
+.feat-card-info{position:absolute;bottom:0;left:0;right:0;padding:1.2rem;background:linear-gradient(transparent,rgba(13,5,8,0.9));backdrop-filter:blur(3px)}
+.feat-tag{display:inline-block;font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#E8C090;border:1px solid rgba(200,144,64,0.38);padding:0.2rem 0.6rem;margin-bottom:0.4rem;border-radius:30px;background:rgba(200,144,64,0.1)}
+.feat-card h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:#FDF0F5;margin-bottom:0.25rem;text-shadow:0 1px 8px rgba(13,5,8,0.9)}
+.feat-price{font-size:0.78rem;color:#E8C090;letter-spacing:0.1em}
 
 /* STORY */
-.story{padding:8rem 4rem;position:relative;z-index:2}
-.story-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
-.story-img img{width:100%;height:500px;object-fit:cover;border-radius:12px;filter:brightness(0.88) saturate(1.1)}
+.story{padding:5rem 1.5rem;position:relative;z-index:2}
+@media(min-width:768px){.story{padding:8rem 4rem}}
+.story-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+@media(min-width:768px){.story-inner{grid-template-columns:1fr 1fr;gap:6rem}}
+.story-img img{width:100%;height:320px;object-fit:cover;border-radius:12px;filter:brightness(0.88) saturate(1.1)}
+@media(min-width:768px){.story-img img{height:500px}}
 .story-img{position:relative}
-.story-img-frame{position:absolute;top:-12px;left:-12px;right:12px;bottom:12px;border:1px solid rgba(200,144,64,0.28);border-radius:14px;z-index:-1}
-.story-text .section-label{text-align:left}
-.story-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;margin-bottom:1.5rem;text-align:left;color:var(--blush)}
-.story-text p{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:1.5rem}
-.story-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(232,160,192,0.12)}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold-light);font-weight:400}
-.stat-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted2);margin-top:0.3rem}
+.story-img-frame{position:absolute;top:-10px;left:-10px;right:10px;bottom:10px;border:1px solid rgba(200,144,64,0.28);border-radius:14px;z-index:-1}
+.story-text .section-label,.story-text h2{text-align:left}
+.story-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:400;margin-bottom:1.2rem;color:#FDF0F5;text-shadow:0 2px 20px rgba(140,30,80,0.4)}
+.story-text p{font-size:0.86rem;color:rgba(253,240,245,0.55);line-height:2;margin-bottom:1.2rem}
+.story-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(232,160,192,0.12);flex-wrap:wrap}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:#E8C090;font-weight:400;text-shadow:0 0 20px rgba(232,192,144,0.4)}
+.stat-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(253,240,245,0.35);margin-top:0.2rem}
 
 /* PRODUCTS */
-.products-hero{min-height:38vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 3rem;position:relative;z-index:2}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;max-width:1200px;margin:0 auto;padding:0 4rem 6rem;position:relative;z-index:2}
-.prod-card{background:rgba(253,240,245,0.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(232,160,192,0.15);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.35s}
-.prod-card:hover{background:rgba(253,240,245,0.13);border-color:rgba(232,160,192,0.3);transform:translateY(-4px)}
+.page-hero{min-height:35vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 1.5rem 2rem;position:relative;z-index:2}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:1200px;margin:0 auto;padding:0 1.2rem 5rem;position:relative;z-index:2}
+@media(min-width:600px){.products-grid{gap:14px;padding:0 2rem 5rem}}
+@media(min-width:900px){.products-grid{grid-template-columns:repeat(3,1fr);padding:0 4rem 6rem}}
+.prod-card{background:rgba(253,240,245,0.07);backdrop-filter:blur(18px);border:1px solid rgba(232,160,192,0.15);border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.35s}
+.prod-card:hover{background:rgba(253,240,245,0.13);border-color:rgba(232,160,192,0.3);transform:translateY(-3px)}
 .prod-img{position:relative;aspect-ratio:1;overflow:hidden}
 .prod-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;filter:brightness(0.84) saturate(1.1)}
-.prod-card:hover .prod-img img{transform:scale(1.07);filter:brightness(0.68) saturate(1.2)}
+.prod-card:hover .prod-img img{transform:scale(1.07);filter:brightness(0.68)}
 .prod-glow{position:absolute;inset:0;background:rgba(200,144,64,0);transition:background 0.4s}
 .prod-card:hover .prod-glow{background:rgba(200,144,64,0.06)}
-.prod-info{padding:1.4rem 1.5rem}
-.prod-type{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose);margin-bottom:0.5rem;opacity:0.85}
-.prod-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--blush);margin-bottom:0.5rem}
-.prod-desc{font-size:0.78rem;color:var(--muted);line-height:1.75;margin-bottom:1rem}
-.prod-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-light)}
+.prod-info{padding:1rem 1.1rem}
+.prod-type{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:#E8A0C0;margin-bottom:0.4rem;opacity:0.85}
+.prod-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:400;color:#FDF0F5;margin-bottom:0.4rem;text-shadow:0 1px 10px rgba(13,5,8,0.5)}
+.prod-desc{font-size:0.74rem;color:rgba(253,240,245,0.5);line-height:1.7;margin-bottom:0.8rem;display:none}
+@media(min-width:600px){.prod-desc{display:block}}
+.prod-price{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#E8C090;text-shadow:0 0 15px rgba(232,192,144,0.35)}
 
 /* CONTACT */
-.contact-hero{min-height:38vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 3rem;position:relative;z-index:2}
-.contact-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:3rem 4rem 8rem;align-items:start;position:relative;z-index:2}
-.contact-info .section-label{text-align:left}
-.contact-info h2{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:400;margin-bottom:1.5rem;text-align:left;color:var(--blush)}
-.contact-info p{font-size:0.88rem;color:var(--muted);line-height:2;margin-bottom:2rem}
-.contact-detail{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;font-size:0.82rem;color:var(--muted)}
-.contact-icon{width:36px;height:36px;background:rgba(253,240,245,0.08);border:1px solid rgba(232,160,192,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;backdrop-filter:blur(8px)}
-.contact-icon svg{width:14px;height:14px;stroke:var(--gold-light);fill:none;stroke-width:1.5}
-.contact-form{background:rgba(253,240,245,0.07);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(232,160,192,0.18);border-radius:16px;padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
-.form-group{display:flex;flex-direction:column;gap:0.5rem}
-.form-group label{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose);opacity:0.85}
-.form-group input,.form-group textarea,.form-group select{background:rgba(253,240,245,0.07);border:1px solid rgba(232,160,192,0.18);color:var(--blush);padding:0.9rem 1rem;font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:300;outline:none;transition:all 0.3s;width:100%;border-radius:8px;backdrop-filter:blur(8px)}
-.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted2)}
+.contact-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:3rem;padding:2rem 1.5rem 6rem;align-items:start;position:relative;z-index:2}
+@media(min-width:768px){.contact-wrap{grid-template-columns:1fr 1fr;gap:5rem;padding:3rem 4rem 8rem}}
+.contact-info .section-label,.contact-info h2{text-align:left}
+.contact-info h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.4rem);font-weight:400;margin-bottom:1.2rem;color:#FDF0F5;text-shadow:0 2px 20px rgba(140,30,80,0.4)}
+.contact-info p{font-size:0.86rem;color:rgba(253,240,245,0.55);line-height:2;margin-bottom:1.5rem}
+.contact-detail{display:flex;align-items:center;gap:0.9rem;margin-bottom:1rem;font-size:0.8rem;color:rgba(253,240,245,0.55)}
+.contact-icon{width:34px;height:34px;background:rgba(253,240,245,0.08);border:1px solid rgba(232,160,192,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:13px;height:13px;stroke:#E8C090;fill:none;stroke-width:1.5}
+.contact-form{background:rgba(253,240,245,0.07);backdrop-filter:blur(24px);border:1px solid rgba(232,160,192,0.18);border-radius:16px;padding:2rem;display:flex;flex-direction:column;gap:1.1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:#E8A0C0;opacity:0.85}
+.form-group input,.form-group textarea,.form-group select{background:rgba(253,240,245,0.07);border:1px solid rgba(232,160,192,0.18);color:#FDF0F5;padding:0.85rem 0.9rem;font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:300;outline:none;transition:all 0.3s;width:100%;border-radius:8px}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(253,240,245,0.3)}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(200,144,64,0.55);background:rgba(253,240,245,0.1)}
-.form-group textarea{height:120px;resize:vertical}
-.form-group select option{background:#1a0510;color:var(--blush)}
-.submit-btn{background:linear-gradient(135deg,rgba(200,144,64,0.88),rgba(232,192,144,0.92));color:#0d0508;border:none;padding:1.1rem 2rem;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.3s;border-radius:8px;margin-top:0.3rem}
+.form-group textarea{height:110px;resize:vertical}
+.form-group select option{background:#1a0510;color:#FDF0F5}
+.submit-btn{background:linear-gradient(135deg,rgba(200,144,64,0.88),rgba(232,192,144,0.92));color:#0d0508;border:none;padding:1.05rem 2rem;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.3s;border-radius:8px;box-shadow:0 4px 16px rgba(200,144,64,0.25)}
 .submit-btn:hover{background:linear-gradient(135deg,rgba(232,192,144,1),rgba(255,215,160,1))}
 
 /* FOOTER */
-footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04);backdrop-filter:blur(16px);border-top:1px solid rgba(232,160,192,0.1)}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold-light)}
-.footer-tagline{font-size:0.7rem;letter-spacing:0.2em;color:var(--muted2);text-transform:uppercase;margin-top:0.3rem}
-.footer-links{display:flex;gap:2rem}
-.footer-links a{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color 0.3s}
-.footer-links a:hover{color:var(--gold-light)}
-.footer-copy{font-size:0.7rem;color:rgba(253,240,245,0.2);letter-spacing:0.1em}
+footer{position:relative;z-index:2;padding:3rem 1.5rem;background:rgba(253,240,245,0.04);backdrop-filter:blur(16px);border-top:1px solid rgba(232,160,192,0.1)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:1.5rem;text-align:center}
+@media(min-width:768px){.footer-inner{flex-direction:row;justify-content:space-between;text-align:left}}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:#E8C090;text-shadow:0 0 20px rgba(232,192,144,0.3)}
+.footer-tagline{font-size:0.65rem;letter-spacing:0.2em;color:rgba(253,240,245,0.35);text-transform:uppercase;margin-top:0.2rem}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(253,240,245,0.35);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:#E8C090}
+.footer-copy{font-size:0.65rem;color:rgba(253,240,245,0.2)}
 
 /* FADE */
-.fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.8s ease,transform 0.8s ease}
 .fade-up.visible{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem}
-  nav ul{gap:1.2rem}
-  .section,.story{padding:5rem 1.5rem}
-  .story-inner,.contact-wrap{grid-template-columns:1fr;gap:3rem}
-  .featured-grid{grid-template-columns:1fr 1fr}
-  .products-grid{padding:0 1.5rem 4rem}
-  .footer-inner{flex-direction:column;gap:2rem;text-align:center}
-  .footer-links{flex-wrap:wrap;justify-content:center}
-  .float-card{display:none}
-}
-@media(max-width:600px){
-  nav ul{display:none}
-  .featured-grid{grid-template-columns:1fr}
-  .page-tabs{flex-wrap:wrap}
-  .tab-btn{border-right:1px solid rgba(253,240,245,0.15)}
-}
 </style>
 </head>
 <body>
@@ -207,21 +194,26 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
 <div class="aurora-overlay"></div>
 
 <nav>
-  <a class="logo" href="#"><em>Golden</em> <span>Frame Studio</span></a>
-  <ul>
-    <li><a href="#" onclick="showPage('home')">Home</a></li>
-    <li><a href="#" onclick="showPage('products')">Collections</a></li>
-    <li><a href="#" onclick="showPage('contact')">Consult</a></li>
+  <a class="logo" href="#" onclick="showPage('home');return false"><em>Golden</em> <span>Frame Studio</span></a>
+  <ul class="nav-desktop">
+    <li><a href="#" onclick="showPage('home');return false">Home</a></li>
+    <li><a href="#" onclick="showPage('products');return false">Collections</a></li>
+    <li><a href="#" onclick="showPage('contact');return false">Consult</a></li>
   </ul>
-  <button class="nav-cta" onclick="showPage('contact')">Book a Consult</button>
+  <button class="nav-cta-desk" onclick="showPage('contact')">Book a Consult</button>
+  <button class="hamburger" id="ham" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="content">
-<div class="page-tabs">
-  <button class="tab-btn active" onclick="showPage('home')">Home</button>
-  <button class="tab-btn" onclick="showPage('products')">Collections</button>
-  <button class="tab-btn" onclick="showPage('contact')">Contact</button>
+<div class="nav-drawer" id="drawer">
+  <a href="#" onclick="showPage('home');closeMenu();return false">Home</a>
+  <a href="#" onclick="showPage('products');closeMenu();return false">Collections</a>
+  <a href="#" onclick="showPage('contact');closeMenu();return false">Consult</a>
+  <button class="drawer-cta" onclick="showPage('contact');closeMenu()">Book a Consult</button>
 </div>
+
+<div class="content">
 
 <!-- HOME -->
 <div id="page-home" class="page active">
@@ -234,8 +226,7 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
       <h1>Heirloom Memories<br><em>Crafted in Gold</em></h1>
       <div class="gold-line"></div>
       <p class="hero-sub">Bespoke photo magnets handcrafted with crystal epoxy,<br>gold-fleck resin, and ornate gilded frames — made to be treasured.</p>
-      <div class="price-pill">Bespoke Tampa Favorites from <strong>&nbsp;$99</strong></div>
-      <br>
+      <div class="price-pill">Bespoke Tampa Favorites from <strong>&nbsp;$99</strong></div><br>
       <div class="hero-btns">
         <button class="btn-primary" onclick="showPage('products')">Explore Collections</button>
         <button class="btn-ghost" onclick="showPage('contact')">Book a Consult</button>
@@ -267,30 +258,9 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
     <h2 class="section-title fade-up">Limited Edition Pieces</h2>
     <p class="section-sub fade-up">Each piece is hand-poured, one at a time. No two are alike.</p>
     <div class="featured-grid fade-up">
-      <div class="feat-card">
-        <img src="images/product1.jpg" alt="Baroque Gold Frame Magnet">
-        <div class="feat-card-info">
-          <span class="feat-tag">Limited Edition</span>
-          <h3>Baroque Gold Portrait</h3>
-          <p class="feat-price">from $99</p>
-        </div>
-      </div>
-      <div class="feat-card">
-        <img src="images/product3.jpg" alt="Wedding Favour">
-        <div class="feat-card-info">
-          <span class="feat-tag">Wedding Collection</span>
-          <h3>Heirloom Favour Set</h3>
-          <p class="feat-price">from $85</p>
-        </div>
-      </div>
-      <div class="feat-card">
-        <img src="images/product4.jpg" alt="Heart Resin Magnet">
-        <div class="feat-card-info">
-          <span class="feat-tag">Bespoke</span>
-          <h3>Gold Fleck Heart</h3>
-          <p class="feat-price">from $95</p>
-        </div>
-      </div>
+      <div class="feat-card"><img src="images/product1.jpg" alt="Baroque Gold Frame"><div class="feat-card-info"><span class="feat-tag">Limited Edition</span><h3>Baroque Gold Portrait</h3><p class="feat-price">from $99</p></div></div>
+      <div class="feat-card"><img src="images/product3.jpg" alt="Wedding Favour"><div class="feat-card-info"><span class="feat-tag">Wedding Collection</span><h3>Heirloom Favour Set</h3><p class="feat-price">from $85</p></div></div>
+      <div class="feat-card"><img src="images/product4.jpg" alt="Heart Magnet"><div class="feat-card-info"><span class="feat-tag">Bespoke</span><h3>Gold Fleck Heart</h3><p class="feat-price">from $95</p></div></div>
     </div>
   </section>
 
@@ -300,7 +270,7 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
         <img src="images/product8.jpg" alt="Studio craftsmanship">
         <div class="story-img-frame"></div>
       </div>
-      <div class="story-text">
+      <div class="story-text fade-up">
         <p class="section-label">Our Story</p>
         <h2>Tampa's Most Exclusive Photo Magnet Studio</h2>
         <p>Every Golden Frame Studio piece begins as a memory — a photograph, a moment, a face you never want to forget. We transform it into a wearable heirloom using hand-poured crystal epoxy, 24-karat gold leaf, and ornate gilded frames crafted to museum standards.</p>
@@ -317,62 +287,35 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
 
 <!-- PRODUCTS -->
 <div id="page-products" class="page">
-  <div class="products-hero">
+  <div class="page-hero">
     <div>
       <p class="section-label">Our Collections</p>
-      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--blush)">The Full Atelier</h1>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);font-weight:400;color:#FDF0F5;text-shadow:0 2px 30px rgba(140,30,80,0.6)">The Full Atelier</h1>
       <div class="gold-line"></div>
-      <p style="font-size:0.85rem;color:var(--muted);letter-spacing:0.08em">Handcrafted in Tampa · Each piece numbered & signed</p>
+      <p style="font-size:0.82rem;color:rgba(253,240,245,0.5);letter-spacing:0.08em">Handcrafted in Tampa · Each piece numbered & signed</p>
     </div>
   </div>
   <div class="products-grid">
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product1.jpg" alt="Baroque Gold Frame"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Signature Collection</p><h3 class="prod-name">Baroque Gold Frame Portrait</h3><p class="prod-desc">Ornate gilded baroque frame with your photo. Available in oval, shield, and rectangular silhouettes.</p><p class="prod-price">from $99</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product2.jpg" alt="Crystal Epoxy"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Crystal Epoxy Series</p><h3 class="prod-name">Crystal Gold-Rim Magnet</h3><p class="prod-desc">Hand-poured crystal epoxy with your choice of 20+ rim colors. Gold rims are our most-requested finish.</p><p class="prod-price">from $85</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product3.jpg" alt="Wedding Favour"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Wedding & Events</p><h3 class="prod-name">Heirloom Wedding Favour</h3><p class="prod-desc">Personalized event favours with names, dates, and dried florals embedded in pure resin. Minimum 10 pieces.</p><p class="prod-price">from $18/each</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product4.jpg" alt="Heart Resin"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Bespoke Shapes</p><h3 class="prod-name">Gold Fleck Heart Magnet</h3><p class="prod-desc">Heart-shaped resin piece with gold leaf inclusions and pearl accent. Perfect for anniversaries and baptisms.</p><p class="prod-price">from $95</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product5.jpg" alt="Acrylic Block"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Modern Series</p><h3 class="prod-name">Acrylic Crystal Block</h3><p class="prod-desc">Thick optical-grade acrylic with gold, rose gold, or chrome edge finish. Ultra-sharp photo reproduction.</p><p class="prod-price">from $110</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product6.jpg" alt="Table Frame"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Tabletop Collection</p><h3 class="prod-name">Gold-Edge Table Frame</h3><p class="prod-desc">Freestanding gold-edge frame — doubles as a tabletop display and a premium refrigerator magnet.</p><p class="prod-price">from $120</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product7.jpg" alt="Mini Frame"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Mini Collection</p><h3 class="prod-name">Miniature Gold Frame</h3><p class="prod-desc">Miniature ornate gold frame magnet — perfect as a gift or keepsake. Each one hand-finished.</p><p class="prod-price">from $75</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product8.jpg" alt="Resin Stone Art"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Artisan Series</p><h3 class="prod-name">Resin Stone & Gold Art</h3><p class="prod-desc">Mixed media resin art piece with natural stones and gold leaf inclusions. A true collector's item.</p><p class="prod-price">from $145</p></div>
-    </div>
-    <div class="prod-card">
-      <div class="prod-img"><img src="images/product9.jpg" alt="Fridge Display Set"><div class="prod-glow"></div></div>
-      <div class="prod-info"><p class="prod-type">Gift Sets</p><h3 class="prod-name">Mini Frames Gift Set</h3><p class="prod-desc">Set of 5 ornate mini frame magnets in a luxury gift box. The perfect housewarming or wedding gift.</p><p class="prod-price">from $165</p></div>
-    </div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product1.jpg" alt="Baroque Gold Frame"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Signature</p><h3 class="prod-name">Baroque Gold Frame</h3><p class="prod-desc">Ornate gilded baroque frame with your photo. Available in oval, shield, and rectangular silhouettes.</p><p class="prod-price">from $99</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product2.jpg" alt="Crystal Epoxy"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Crystal Epoxy</p><h3 class="prod-name">Gold-Rim Magnet</h3><p class="prod-desc">Hand-poured crystal epoxy with your choice of 20+ rim colors. Gold rims are our most-requested finish.</p><p class="prod-price">from $85</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product3.jpg" alt="Wedding Favour"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Wedding</p><h3 class="prod-name">Heirloom Favour</h3><p class="prod-desc">Personalized event favours with names, dates, and dried florals embedded in pure resin.</p><p class="prod-price">from $18/each</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product4.jpg" alt="Heart Resin"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Bespoke</p><h3 class="prod-name">Gold Fleck Heart</h3><p class="prod-desc">Heart-shaped resin with gold leaf and pearl accent. Perfect for anniversaries and baptisms.</p><p class="prod-price">from $95</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product5.jpg" alt="Acrylic Block"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Modern</p><h3 class="prod-name">Acrylic Crystal Block</h3><p class="prod-desc">Thick optical-grade acrylic with gold, rose gold, or chrome edge finish.</p><p class="prod-price">from $110</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product6.jpg" alt="Table Frame"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Tabletop</p><h3 class="prod-name">Gold-Edge Frame</h3><p class="prod-desc">Freestanding gold-edge frame — doubles as a display and a premium refrigerator magnet.</p><p class="prod-price">from $120</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product7.jpg" alt="Mini Frame"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Mini</p><h3 class="prod-name">Miniature Gold Frame</h3><p class="prod-desc">Miniature ornate gold frame magnet. Each one hand-finished — perfect as a gift.</p><p class="prod-price">from $75</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product8.jpg" alt="Resin Stone"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Artisan</p><h3 class="prod-name">Resin Stone & Gold</h3><p class="prod-desc">Mixed media resin art with natural stones and gold leaf inclusions. A true collector's item.</p><p class="prod-price">from $145</p></div></div>
+    <div class="prod-card"><div class="prod-img"><img src="images/product9.jpg" alt="Gift Set"><div class="prod-glow"></div></div><div class="prod-info"><p class="prod-type">Gift Sets</p><h3 class="prod-name">Mini Frames Gift Set</h3><p class="prod-desc">Set of 5 ornate mini frame magnets in a luxury gift box. The perfect housewarming gift.</p><p class="prod-price">from $165</p></div></div>
   </div>
 </div>
 
 <!-- CONTACT -->
 <div id="page-contact" class="page">
-  <div class="contact-hero">
+  <div class="page-hero">
     <div>
       <p class="section-label">Florida Exclusive</p>
-      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;color:var(--blush)">Book Your Custom Consult</h1>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,7vw,4rem);font-weight:400;color:#FDF0F5;text-shadow:0 2px 30px rgba(140,30,80,0.6)">Book Your Custom Consult</h1>
       <div class="gold-line"></div>
-      <p style="font-size:0.85rem;color:var(--muted);max-width:500px;line-height:1.9;margin:0 auto">Every piece begins with a conversation. Tell us your vision — we'll craft it in gold.</p>
+      <p style="font-size:0.82rem;color:rgba(253,240,245,0.5);max-width:480px;line-height:1.9;margin:0 auto">Every piece begins with a conversation. Tell us your vision — we'll craft it in gold.</p>
     </div>
   </div>
   <div class="contact-wrap">
@@ -380,54 +323,34 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
       <p class="section-label">Get in Touch</p>
       <h2>Let's Create Something Extraordinary</h2>
       <p>We work with a limited number of clients each month to ensure every piece receives the attention it deserves. Book your consultation early.</p>
-      <div style="margin-bottom:2rem;border-radius:12px;overflow:hidden;border:1px solid rgba(232,160,192,0.15)">
-        <img src="images/product9.jpg" alt="Studio" style="width:100%;height:200px;object-fit:cover;filter:brightness(0.78) saturate(1.1);display:block">
+      <div style="margin-bottom:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(232,160,192,0.15)">
+        <img src="images/product9.jpg" alt="Studio" style="width:100%;height:180px;object-fit:cover;filter:brightness(0.75) saturate(1.1);display:block">
       </div>
-      <div class="contact-detail">
-        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        Tampa, Florida — USA
-      </div>
-      <div class="contact-detail">
-        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1H6.59a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 5.55 5.55l.92-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        By appointment only
-      </div>
-      <div class="contact-detail">
-        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        studio@goldenframestudio.com
-      </div>
+      <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Tampa, Florida — USA</div>
+      <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.58 1H6.59a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 5.55 5.55l.92-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>By appointment only</div>
+      <div class="contact-detail"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>studio@goldenframestudio.com</div>
     </div>
     <form class="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
       <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
       <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+1 (813) 000-0000"></div>
-      <div class="form-group">
-        <label>I'm Interested In</label>
-        <select>
-          <option value="">Select a collection...</option>
-          <option>Baroque Gold Frame Portrait</option>
-          <option>Crystal Epoxy Magnet</option>
-          <option>Wedding / Event Favours</option>
-          <option>Acrylic Crystal Block</option>
-          <option>Custom Bespoke Piece</option>
-        </select>
+      <div class="form-group"><label>I'm Interested In</label>
+        <select><option value="">Select a collection...</option><option>Baroque Gold Frame Portrait</option><option>Crystal Epoxy Magnet</option><option>Wedding / Event Favours</option><option>Acrylic Crystal Block</option><option>Custom Bespoke Piece</option></select>
       </div>
       <div class="form-group"><label>Your Vision</label><textarea placeholder="Tell us about your occasion, photos in mind, and any special requests..."></textarea></div>
       <button type="submit" class="submit-btn">Send My Enquiry →</button>
-      <p id="form-msg" style="font-size:0.8rem;color:var(--gold-light);display:none;margin-top:0.5rem">Thank you — we'll be in touch within 24 hours.</p>
+      <p id="form-msg" style="font-size:0.78rem;color:#E8C090;display:none;margin-top:0.5rem">Thank you — we'll be in touch within 24 hours.</p>
     </form>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <div>
-      <div class="footer-logo">Golden Frame Studio</div>
-      <div class="footer-tagline">Heirloom Photo Magnets · Tampa, Florida</div>
-    </div>
+    <div><div class="footer-logo">Golden Frame Studio</div><div class="footer-tagline">Heirloom Photo Magnets · Tampa, Florida</div></div>
     <div class="footer-links">
-      <a href="#" onclick="showPage('home')">Home</a>
-      <a href="#" onclick="showPage('products')">Collections</a>
-      <a href="#" onclick="showPage('contact')">Consult</a>
+      <a href="#" onclick="showPage('home');return false">Home</a>
+      <a href="#" onclick="showPage('products');return false">Collections</a>
+      <a href="#" onclick="showPage('contact');return false">Consult</a>
     </div>
     <div class="footer-copy">© 2025 Golden Frame Studio. All rights reserved.</div>
   </div>
@@ -438,12 +361,18 @@ footer{position:relative;z-index:2;padding:4rem;background:rgba(253,240,245,0.04
 function showPage(p){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.getElementById('page-'+p).classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.remove('active');
-    if(['home','products','contact'][i]===p)b.classList.add('active');
-  });
   window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(initFade,100);
+}
+function toggleMenu(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('drawer').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('drawer').classList.contains('open')?'hidden':'';
+}
+function closeMenu(){
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow='';
 }
 function initFade(){
   const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:0.1});
